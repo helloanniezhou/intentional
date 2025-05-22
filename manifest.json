@@ -1,0 +1,8 @@
+{
+  "manifest_version": 3,
+  "name": "Intentional Tab",
+  "version": "1.0",
+  "description": "Set an intentional message on every new tab to inspire focus and mindfulness.",
+  "chrome_url_overrides": { "newtab": "newtab.html" },
+  "permissions": ["storage"]
+}
