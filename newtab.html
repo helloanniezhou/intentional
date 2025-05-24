@@ -4,16 +4,26 @@
   <meta charset="UTF-8">
   <title>📗New Tab</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Top-right controls -->
+  <div id="controls">
+    <button id="setBtn">✍️ Set intention today</button>
+    <button id="randomBtn">🎲 Inspire me</button>
+  </div>
+
+  <!-- Centered display -->
   <div id="display">
     <span id="customText"></span>
-    <button id="editBtn">✏️ Edit</button>
   </div>
-  <div id="editor" style="display: none;">
-    <input type="text" id="textInput" />
+
+  <!-- Inline editor -->
+  <div id="editor">
+    <textarea id="textInput" placeholder="Type your intention…"></textarea>
     <button id="saveBtn">💾 Save</button>
   </div>
   <script src="newtab.js"></script>
-</body>
 </html>
