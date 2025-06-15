@@ -29,9 +29,36 @@ const sampleQuotes = [
   'Be the light',
   'Trust the process'
 ];
+
+async function fetchGeminiQuote(apiKey) {
+  const prompt = 'Give me a text under 10 words to help set an intention.';
+  const body = { contents: [{ parts: [{ text: prompt }] }] };
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error('API error');
+  const data = await res.json();
+  return data.candidates?.[0]?.content?.parts?.[0]?.text;
+}
+
 randomBtn.addEventListener('click', () => {
-  const pick = sampleQuotes[Math.floor(Math.random()*sampleQuotes.length)];
-  chrome.storage.sync.set({ customText: pick }, loadText);
+  chrome.storage.sync.get(['apiKey'], async ({ apiKey }) => {
+    let pick;
+    if (apiKey) {
+      try {
+        pick = await fetchGeminiQuote(apiKey);
+      } catch (e) {
+        console.error('Gemini request failed', e);
+      }
+    }
+    if (!pick) {
+      pick = sampleQuotes[Math.floor(Math.random() * sampleQuotes.length)];
+    }
+    chrome.storage.sync.set({ customText: pick }, loadText);
+  });
 });
 
 // Save and go back
@@ -44,3 +71,4 @@ saveBtn.addEventListener('click', () => {
 });
 
 loadText();
+
