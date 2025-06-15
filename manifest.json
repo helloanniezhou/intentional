@@ -5,5 +5,6 @@
   "description": "Set an intentional message on every new tab to inspire focus and mindfulness.",
   "chrome_url_overrides": { "newtab": "newtab.html" },
   "permissions": ["storage"],
-  "host_permissions": ["https://generativelanguage.googleapis.com/*"]
+  "host_permissions": ["https://generativelanguage.googleapis.com/*"],
+  "options_page": "optional.html"
 }
